@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Info</title>
+</head>
+
+<body>
+    {{/* 演示 内置函数用法 */}}
+    <div>
+        <ul>
+            <li> map长度: {{len .}}</li>
+            <li>第一个元素: {{index . 1}}</li>
+            {{ with index . 1 }}
+            <li>姓名: {{.UserName}}</li>
+            <li>密码: {{.Password}}</li>
+            <li>年龄: {{.Age}}</li>
+            <li>{{ printf "姓名： %s, 密码: %s, 年龄: %d" .UserName .Password .Age}}</li>
+            {{ end }}
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+mode: set
+github.com/zhuge20100104/laonanhai/testgroup/split.go:11.47,14.15 2 1
+github.com/zhuge20100104/laonanhai/testgroup/split.go:19.2,20.8 2 1
+github.com/zhuge20100104/laonanhai/testgroup/split.go:14.15,18.3 3 1

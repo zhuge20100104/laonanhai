@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Info</title>
+</head>
+
+<body>
+    {{/* 演示 range 模板用法 */}}
+    <div>
+        <table border="1">
+            <thead>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>密码</th>
+                <th>年龄</th>
+            </thead>
+            <tbody>
+
+                {{ range  $index, $user := . }}
+                <tr>
+                    <td>{{ $index }}</td>
+                    <td>{{ $user.UserName }}</td>
+                    <td>{{ $user.Password }}</td>
+                    <td>{{ $user.Age }}</td>
+                </tr>
+                {{end}}
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
