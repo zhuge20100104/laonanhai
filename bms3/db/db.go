@@ -1,0 +1,100 @@
+package db
+
+import (
+
+	// 加载MYSQL数据库驱动
+	"errors"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
+	m "github.com/zhuge20100104/laonanhai/bms3/models"
+	"github.com/zhuge20100104/laonanhai/bms3/utils"
+)
+
+var (
+	// Db 全局的数据库对象
+	Db *DB
+)
+
+// DB DB对象结构体
+type DB struct {
+	DB *sqlx.DB
+}
+
+func init() {
+	Db = new(DB)
+	dsn := "root:root@tcp(127.0.0.1:3306)/books"
+	db, err := sqlx.Open("mysql", dsn)
+	// 连接数据库失败，直接Panic
+	utils.PanicErrorHand(err, "sqlx.Open Connect DB")
+	db.SetMaxOpenConns(100)
+	db.SetMaxIdleConns(16)
+	Db.DB = db
+}
+
+// QueryAllBook 查询所有书籍的函数
+func (d *DB) QueryAllBook() (bookList []*m.Book, err error) {
+	sqlStr := "select id, title, price from book;"
+	err = d.DB.Select(&bookList, sqlStr)
+	if err != nil {
+		utils.DefErrorHand(err, "d.DB.Select")
+		return
+	}
+	return
+}
+
+// InsertBook 插入书籍
+func (d *DB) InsertBook(book *m.Book) (err error) {
+	sqlStr := "insert into book(title, price) values(?,?)"
+	_, err = d.DB.Exec(sqlStr, book.Title, book.Price)
+	if err != nil {
+		utils.DefErrorHand(err, "db.Exec Insert")
+		return
+	}
+	return
+}
+
+// DeleteBook 根据ID删除书籍
+func (d *DB) DeleteBook(id int) (err error) {
+	sqlStr := "delete from book where id=?"
+	_, err = d.DB.Exec(sqlStr, id)
+	if err != nil {
+		utils.DefErrorHand(err, "d.DB.Exec Delete")
+		return
+	}
+	return
+}
+
+// QueryBookByID 通过ID查询指定书籍信息的函数
+func (d *DB) QueryBookByID(id int) (book *m.Book, err error) {
+	sqlStr := "select id, title, price from book where id=?"
+	books := make([]*m.Book, 0)
+	err = d.DB.Select(&books, sqlStr, id)
+	if err != nil {
+		utils.DefErrorHand(err, "d.DB.Select QueryBookByID")
+		return
+	}
+	if len(books) == 0 {
+		err = errors.New("不存在的Book ID")
+		utils.DefErrorHand(err, "QueryBookByID")
+		return
+	}
+	book = books[0]
+	return
+}
+
+// UpdateBook 更新书籍信息
+func (d *DB) UpdateBook(book *m.Book) (err error) {
+	sqlStr := "update book set title=?, price=? where id=?"
+	_, err = d.DB.Exec(sqlStr, book.Title, book.Price, book.ID)
+	if err != nil {
+		utils.DefErrorHand(err, "d.DB.Exec UpdateBook")
+		return
+	}
+	return
+}
+
+// CloseDB 关闭数据库连接的函数
+func (d *DB) CloseDB() {
+	d.DB.Close()
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>编辑书籍</title>
+    </head>
+    <body>
+        <form method="POST" action="/book/edit" enctype="application/x-www-form-urlencoded">
+            <div>
+                <input type="hidden" name="id" value="{{.ID}}">
+                <label>
+                    书名:
+                    <input type="text" name="title" value="{{.Title}}">
+                </label>
+            </div>
+            <div>
+                <label>
+                    价格:
+                    <input type="text" name="price" value="{{.Price}}">
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="提交">
+            </div>
+        </form>
+    </body>
+</html>
