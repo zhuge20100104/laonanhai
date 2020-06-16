@@ -30,3 +30,6 @@
 - [Gin获取参数和参数绑定2](gin12/)
 - [Gin获取参数和参数绑定3](gin13/)
 - [BMS之书籍删除](bms3/)
+- [Logrus示例](logrus1/)
+- [Logrus示例2](logrus2/)
+- [Logrus示例3](logrus3/)
