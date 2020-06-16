@@ -22,3 +22,4 @@
 - [QueryString参数处理](gin6/)
 - [Form参数和Path参数处理](gin7/)
 - [BMS书籍管理查询和新增](bms1/)
+- [BMS书籍管理删除数据](bms2)
