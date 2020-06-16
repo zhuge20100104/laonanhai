@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Info</title>
+</head>
+
+<body>
+    <div>
+        <p>
+            {{ with index . 1 }}
+            {{ kua .UserName }}
+            {{ end }}
+        </p>
+        <p>
+            {{ with index . 2 }}
+            {{ kua .UserName }}
+            {{ end }}
+        </p>
+    </div>
+</body>
+
+</html>

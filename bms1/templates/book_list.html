@@ -1,0 +1,39 @@
+{{ define "book_list.html" }}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>书籍列表</title>
+</head>
+
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{ range .data }}
+            <tr>
+                <td>{{ .ID }}</td>
+                <td>{{ .Title }}</td>
+                <td>{{ .Price }}</td>
+            </tr>
+            {{ end }}
+        </tbody>
+
+    </table>
+</body>
+
+</html>
+{{ end }}
