@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>登陆</title>
+    </head>
+
+    <body>
+        <form method="POST" enctype="application/x-www-form-urlencoded" action="/login">
+            <div>
+                <label>
+                    用户名:
+                    <input name="username" type="text">
+                </label>
+            </div>
+            <div>
+                <label>
+                    密码:
+                    <input name="password" type="password">
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="登陆">
+                <p style="color: red;">{{ .err }}</p>
+            </div>
+        </form>
+    </body>
+</html>
